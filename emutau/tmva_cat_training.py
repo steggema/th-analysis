@@ -10,7 +10,7 @@ tree = tfile.Get('Tree')
 # training_vars = ['bdt_evt_leading_btag_pt','bdt_evt_leading_btag', 'bdt_evt_max_jet_eta', '(bdt_evt_max_jet_eta30*(bdt_evt_max_jet_eta30>0.))', 'bdt_evt_njet_or30', 'bdt_evt_Met', 'bdt_evt_Mmt', 'bdt_evt_Mem', 'bdt_evt_LT',  'bdt_evt_missing_et', 'bdt_evt_nbjet', 'bdt_evt_centrality', 
 # 'bdt_evt_HT', 'abs(bdt_evt_deltaeta)', 'abs(bdt_muon_eta-bdt_tau_eta)', 'abs(bdt_muon_eta-bdt_electron_eta)', 'abs(bdt_electron_eta-bdt_tau_eta)', 'bdt_evt_maxMT', 'abs(bdt_evt_dphi_mete)', 'abs(bdt_evt_dphi_metmu)', 'abs(bdt_evt_dphi_mettau)']#, 'bdt_tau_decaymode', 'bdt_muon_charge',
 
-training_vars = ['bdt_evt_max_jet_eta','bdt_evt_njet_or30']
+training_vars = ['bdt_evt_max_jet_eta','bdt_evt_njet_or30', 'bdt_evt_sphericity', 'bdt_evt_aplanarity']
 # training_vars = ['bdt_evt_nbjet', 'bdt_evt_centrality', 'bdt_muon_charge', 'bdt_evt_HT']
 
 # training_vars = ['bdt_evt_centrality', 'abs(bdt_evt_dphi_metmu)', 'bdt_evt_maxMT', 'bdt_evt_missing_et']

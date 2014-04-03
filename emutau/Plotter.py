@@ -526,6 +526,8 @@ if __name__ == '__main__':
     {'var':'Fisher', 'varname':'Fisher', 'legend':'top left', 'logy':False, 'title':'Fisher score', 'unit':'', 'nbinsx':10, 'xmin':-1., 'xmax':1.0001},
     {'var':'bdt_evt_missing_et', 'varname':'bdt_evt_missing_et', 'legend':'top right', 'logy':False, 'title':'E_{T}^{miss}', 'unit':'GeV', 'nbinsx':20, 'xmin':0., 'xmax':300.},
     {'var':'bdt_evt_centrality', 'varname':'bdt_evt_centrality', 'legend':'top right', 'logy':False, 'title':'Centrality', 'unit':'', 'nbinsx':20, 'xmin':0., 'xmax':1.},
+    {'var':'bdt_evt_sphericity', 'varname':'bdt_evt_sphericity', 'legend':'top right', 'logy':False, 'title':'Sphericity', 'unit':'', 'nbinsx':12, 'xmin':0., 'xmax':1.},
+    {'var':'bdt_evt_aplanarity', 'varname':'bdt_evt_aplanarity', 'legend':'top right', 'logy':False, 'title':'Aplanarity', 'unit':'', 'nbinsx':12, 'xmin':0., 'xmax':0.4},
     {'var':'bdt_tau_decaymode', 'varname':'bdt_tau_decaymode', 'legend':'top right', 'logy':False, 'title':'#tau decay mode', 'unit':'', 'nbinsx':11, 'xmin':-0.5, 'xmax':10.5},
     {'var':'bdt_tau_mass', 'varname':'bdt_tau_mass', 'legend':'top right', 'logy':False, 'title':'#tau mass', 'unit':'GeV', 'nbinsx':10, 'xmin':0., 'xmax':3.5},
     {'var':'bdt_evt_leading_btag_pt', 'varname':'bdt_evt_leading_btag_pt', 'legend':'top right', 'logy':False, 'title':'p_{T} b jet_{1}', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':200.},
