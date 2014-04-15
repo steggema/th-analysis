@@ -534,6 +534,8 @@ if __name__ == '__main__':
     {'var':'bdt_evt_sleading_btag_pt', 'varname':'bdt_evt_sleading_btag_pt', 'legend':'top right', 'logy':False, 'title':'p_{T} b jet_{2}', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':200.},
     {'var':'bdt_evt_leading_btag', 'varname':'bdt_evt_leading_btag', 'legend':'top right', 'logy':False, 'title':'CSV b jet_{1}', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':1.},
     {'var':'bdt_evt_sleading_btag', 'varname':'bdt_evt_sleading_btag', 'legend':'top right', 'logy':False, 'title':'CSV b jet_{2}', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':1.},
+    {'var':'bdt_evt_leading_nbtag', 'varname':'bdt_evt_leading_nbtag', 'legend':'top right', 'logy':False, 'title':'CSV l jet_{1}', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':1.},
+    {'var':'bdt_evt_sleading_nbtag', 'varname':'bdt_evt_sleading_nbtag', 'legend':'top right', 'logy':False, 'title':'CSV l jet_{2}', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':1.},
     {'var':'bdt_evt_max_jet_eta', 'varname':'bdt_evt_max_jet_eta', 'legend':'top right', 'logy':False, 'title':'max(jet |#eta|)', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':5.},
     {'var':'(bdt_evt_max_jet_eta30*(bdt_evt_max_jet_eta30>0.))', 'varname':'bdt_evt_max_jet_eta30', 'legend':'top right', 'logy':False, 'title':'max(jet |#eta|, 30 GeV)', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':5.},
     {'var':'bdt_evt_njet_or', 'varname':'bdt_evt_njet_or', 'legend':'top right', 'logy':False, 'title':'N_{jets} (20 GeV)', 'unit':'', 'nbinsx':10, 'xmin':-0.5, 'xmax':9.5},
