@@ -1,8 +1,10 @@
 import ROOT
 import os
-import NtupleTMVAEvaluate
-import array
 import math
+import sys
+
+sys.path.append("../Common")
+import NtupleTMVAEvaluate
 
 from tmva_cat_training import training_vars
 
