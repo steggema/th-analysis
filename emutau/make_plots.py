@@ -45,13 +45,25 @@ if __name__ == '__main__':
     {'var':'abs(bdt_evt_dphi_mete)', 'varname':'abs_bdt_evt_dphi_mete', 'legend':'top right', 'logy':False, 'title':'|#Delta #phi(E_{T}^{miss}, e)|', 'unit':'', 'nbinsx':5, 'xmin':0., 'xmax':3.1415927},
     {'var':'abs(bdt_evt_dphi_metmu)', 'varname':'abs_bdt_evt_dphi_metmu', 'legend':'top right', 'logy':False, 'title':'|#Delta #phi(E_{T}^{miss}, #mu)|', 'unit':'', 'nbinsx':5, 'xmin':0., 'xmax':3.1415927},
     {'var':'abs(bdt_evt_dphi_mettau)', 'varname':'abs_bdt_evt_dphi_mettau', 'legend':'top right', 'logy':False, 'title':'|#Delta #phi(E_{T}^{miss}, #tau)|', 'unit':'', 'nbinsx':5, 'xmin':0., 'xmax':3.1415927},
+    {'var':'bdt_muon_jet_csv', 'varname':'bdt_muon_jet_csv', 'legend':'top right', 'logy':False, 'title':'CSV #mu jet', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':1.00001},
+    {'var':'bdt_tau_jet_csv', 'varname':'bdt_tau_jet_csv', 'legend':'top right', 'logy':False, 'title':'CSV #tau jet', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':1.00001},
+    {'var':'bdt_electron_jet_csv', 'varname':'bdt_electron_jet_csv', 'legend':'top right', 'logy':False, 'title':'CSV e jet', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':1.00001},
+    {'var':'abs(bdt_muon_pdg)', 'varname':'bdt_muon_pdg', 'legend':'top right', 'logy':False, 'title':'PDG muon match', 'unit':'', 'nbinsx':16, 'xmin':-0.5, 'xmax':15.5},
+    {'var':'abs(bdt_electron_pdg)', 'varname':'bdt_electron_pdg', 'legend':'top right', 'logy':False, 'title':'PDG electron match', 'unit':'', 'nbinsx':16, 'xmin':-0.5, 'xmax':15.5},
+    {'var':'abs(bdt_tau_pdg)', 'varname':'bdt_tau_pdg', 'legend':'top right', 'logy':False, 'title':'PDG tau match', 'unit':'', 'nbinsx':16, 'xmin':-0.5, 'xmax':15.5},
+    {'var':'abs(bdt_evt_dr_mujet)', 'varname':'bdt_evt_dr_mujet', 'legend':'top right', 'logy':False, 'title':'#Delta R(#mu, jet)', 'unit':'', 'nbinsx':15, 'xmin':0., 'xmax':6.},
+    {'var':'abs(bdt_evt_dr_taujet)', 'varname':'bdt_evt_dr_taujet', 'legend':'top right', 'logy':False, 'title':'#Delta R(#tau, jet)', 'unit':'', 'nbinsx':15, 'xmin':0., 'xmax':6.},
+    {'var':'abs(bdt_evt_dr_ejet)', 'varname':'bdt_evt_dr_ejet', 'legend':'top right', 'logy':False, 'title':'#Delta R(e, jet)', 'unit':'', 'nbinsx':15, 'xmin':0., 'xmax':6.},
+    {'var':'bdt_evt_dr_mujet_csv', 'varname':'bdt_evt_dr_mujet_csv', 'legend':'top right', 'logy':False, 'title':'CSV jet near #mu', 'unit':'', 'nbinsx':15, 'xmin':0., 'xmax':1.0001},
+    {'var':'bdt_evt_dr_ejet_csv', 'varname':'bdt_evt_dr_ejet_csv', 'legend':'top right', 'logy':False, 'title':'CSV jet near e', 'unit':'', 'nbinsx':15, 'xmin':0., 'xmax':1.0001},
+    {'var':'bdt_evt_dr_taujet_csv', 'varname':'bdt_evt_dr_taujet_csv', 'legend':'top right', 'logy':False, 'title':'CSV jet near #tau', 'unit':'', 'nbinsx':15, 'xmin':0., 'xmax':1.0001},
 
     ]
 
     sampleDict = {
         0:{'name':'WZ', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'WZ'},
         1:{'name':'ZZ', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':'ZZ'},
-        2:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,204), 'label':'t#bar{t} (1l)'},
+        2:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,250), 'label':'t#bar{t} (1l)'},
         3:{'name':'tt2l', 'colour':ROOT.TColor.GetColor(155,152,204), 'label':'t#bar{t} (2l)'},
         4:{'name':'ttW', 'colour':ROOT.TColor.kGreen + 2, 'label':'t#bar{t}W'},
         5:{'name':'ttZ', 'colour':ROOT.TColor.kGreen + 3, 'label':'t#bar{t}Z'},

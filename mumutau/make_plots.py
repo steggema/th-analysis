@@ -59,10 +59,10 @@ if __name__ == '__main__':
         7:{'name':'W3Jet', 'colour':ROOT.TColor.kGreen + 2, 'label':''},
         8:{'name':'W4Jet', 'colour':ROOT.TColor.kGreen + 2, 'label':''},
 
-        9:{'name':'DY1Jet', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'DY + jets'},
-        10:{'name':'DY2Jet', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':''},
-        11:{'name':'DY3Jet', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':''},
-        12:{'name':'DY4Jet', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':''},
+        9:{'name':'DY1Jet', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':'DY + jets'},
+        10:{'name':'DY2Jet', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':''},
+        11:{'name':'DY3Jet', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':''},
+        12:{'name':'DY4Jet', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':''},
 
 
 
