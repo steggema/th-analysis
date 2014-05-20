@@ -1,14 +1,13 @@
 import sys
 sys.path.append("../Common")
 
-import ROOT
-
 from Plotter import Plotter
+from samples import sampleDict
 
 if __name__ == '__main__':
     variables = [
-    {'var':'BDTG', 'varname':'BDTG', 'legend':'top left', 'logy':False, 'title':'BDT score', 'unit':'', 'nbinsx':10, 'xmin':-1., 'xmax':1.0001},
-    {'var':'Fisher', 'varname':'Fisher', 'legend':'top left', 'logy':False, 'title':'Fisher score', 'unit':'', 'nbinsx':10, 'xmin':-1., 'xmax':1.0001},
+    {'var':'BDTG', 'varname':'BDTG', 'legend':'top left', 'logy':False, 'title':'BDT score', 'unit':'', 'nbinsx':10, 'xmin':-1., 'xmax':1.0001, 'save':True},
+    {'var':'Fisher', 'varname':'Fisher', 'legend':'top left', 'logy':False, 'title':'Fisher score', 'unit':'', 'nbinsx':10, 'xmin':-1., 'xmax':1.0001, 'save':True},
     {'var':'bdt_evt_missing_et', 'varname':'bdt_evt_missing_et', 'legend':'top right', 'logy':False, 'title':'E_{T}^{miss}', 'unit':'GeV', 'nbinsx':20, 'xmin':0., 'xmax':300.},
     {'var':'bdt_evt_centrality', 'varname':'bdt_evt_centrality', 'legend':'top right', 'logy':False, 'title':'Centrality', 'unit':'', 'nbinsx':20, 'xmin':0., 'xmax':1.},
     # {'var':'bdt_evt_sphericity', 'varname':'bdt_evt_sphericity', 'legend':'top right', 'logy':False, 'title':'Sphericity', 'unit':'', 'nbinsx':12, 'xmin':0., 'xmax':1.},
@@ -42,39 +41,9 @@ if __name__ == '__main__':
     # {'var':'abs(bdt_evt_dphi_mete)', 'varname':'abs_bdt_evt_dphi_mete', 'legend':'top right', 'logy':False, 'title':'|#Delta #phi(E_{T}^{miss}, e)|', 'unit':'', 'nbinsx':5, 'xmin':0., 'xmax':3.1415927},
     {'var':'abs(bdt_evt_dphi_metmu)', 'varname':'abs_bdt_evt_dphi_metmu', 'legend':'top right', 'logy':False, 'title':'|#Delta #phi(E_{T}^{miss}, #mu)|', 'unit':'', 'nbinsx':5, 'xmin':0., 'xmax':3.1415927},
     {'var':'abs(bdt_evt_dphi_mettau)', 'varname':'abs_bdt_evt_dphi_mettau', 'legend':'top right', 'logy':False, 'title':'|#Delta #phi(E_{T}^{miss}, #tau)|', 'unit':'', 'nbinsx':5, 'xmin':0., 'xmax':3.1415927},
-
     ]
 
 
-
-    sampleDict = {
-        0:{'name':'WW', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'WZ/WW'},
-        1:{'name':'WZ', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':''},
-        2:{'name':'ZZ', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':'ZZ'},
-        3:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,204), 'label':'t#bar{t} (1l)'},
-        4:{'name':'tt2l', 'colour':ROOT.TColor.GetColor(160,160,220), 'label':'t#bar{t} (2l)'},
-
-        5:{'name':'W1Jet', 'colour':ROOT.TColor.kGreen + 2, 'label':'W + jets'},
-        6:{'name':'W2Jet', 'colour':ROOT.TColor.kGreen + 2, 'label':''},
-        7:{'name':'W3Jet', 'colour':ROOT.TColor.kGreen + 2, 'label':''},
-        8:{'name':'W4Jet', 'colour':ROOT.TColor.kGreen + 2, 'label':''},
-
-        9:{'name':'DY1Jet', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':'DY + jets'},
-        10:{'name':'DY2Jet', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':''},
-        11:{'name':'DY3Jet', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':''},
-        12:{'name':'DY4Jet', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':''},
-
-
-
-
-        # 4:{'name':'ttW', 'colour':ROOT.TColor.kGreen + 2, 'label':'t#bar{t}W'},
-        # 5:{'name':'ttZ', 'colour':ROOT.TColor.kGreen + 3, 'label':'t#bar{t}Z'},
-        13:{'name':'tH_YtMinus', 'colour':ROOT.TColor.kRed + 3, 'label':'tH (y_{t}=-1)'},
-        # 7:{'name':'ttH', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':'t#bar{t}H'},
-
-        # 8:{'name':'reducible', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'Reducible'},
-        # 100:{'name':'data', 'colour':1, 'label':'Data'}, # FIXME: 100?
-    }
     p = Plotter(variables, sampleDict, fileName="BDT_training_mva.root", signalsampleIds=[13], datasampleIds=[100])
     p.readTuples()
     p.makePlots(weight='bdt_evt_weight')

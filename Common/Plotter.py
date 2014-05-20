@@ -108,7 +108,15 @@ class Plotter(object):
             nbinsx = varDict['nbinsx']
             xmin = varDict['xmin']
             xmax = varDict['xmax']
+
+            saveRoot = False
+            if 'save' in varDict and varDict['save']:
+                saveRoot = True
             
+            outFile = 0
+            if saveRoot:
+                outFile = ROOT.TFile('{var}.root'.format(var=varName), 'RECREATE')
+
             labelx = varTitle
             if varUnit != "":
                 labelx += " (" + varUnit + ")"
@@ -126,8 +134,6 @@ class Plotter(object):
                     print "Using LOG y"
             
             plotName = varName
-            if title != "":
-                plotName = plotName + "_" + title
             
             if not self._drawRatios:
                 cv = ROOT.TCanvas(plotName, plotName, 10, 10, 700, 500) # top default ratio, adding some space below for pull distributions:
@@ -182,9 +188,13 @@ class Plotter(object):
                  
                 for sampleId in self._sampleDict:
                     # for iTuple, ntuple in enumerate(tuples[sampleId]):
-                    histName = plotName+str(sampleId)+mode
+                    # histName = plotName+str(sampleId)+mode
+                    histName = plotName + self._sampleDict[sampleId]['name']
                     if logy:
                         histName += "logy"
+
+                    if outFile:
+                        outFile.cd()
 
                     hist = ROOT.TH1F(histName, "", nbinsx, xmin, xmax)
                     hist.Sumw2()
@@ -282,6 +292,13 @@ class Plotter(object):
             # if self._sysName:
             #     errorGraph = ROOT.TGraphAsymmErrors()
             
+            # Save stuff
+            if outFile:
+                for h in histograms:
+                    h.Write()
+                outFile.Write()
+
+
             if self._drawRatios:
                 histPull = ROOT.TH1F(plotName+"pull", "", nbinsx, xmin, xmax)
                 histPullHigher = ROOT.TH1F(plotName+"pulllow", "", nbinsx, xmin, xmax)
@@ -321,18 +338,18 @@ class Plotter(object):
                     else:
                         histPullLower.SetBinContent(iBin+1, -self._pullRange - 1000.)
                 
-                defaultXtoPixel = 696. # width in pixels of default canvas
+                # defaultXtoPixel = 696. # width in pixels of default canvas
                 defaultYtoPixel = 472. # height in pixels of default canvas
                 
-                pad1XtoPixel = float(cv.GetPad(1).XtoPixel(1))
+                # pad1XtoPixel = float(cv.GetPad(1).XtoPixel(1))
                 pad1YtoPixel = float(cv.GetPad(1).YtoPixel(0))
-                pad2XtoPixel = float(cv.GetPad(2).XtoPixel(1))
+                # pad2XtoPixel = float(cv.GetPad(2).XtoPixel(1))
                 pad2YtoPixel = float(cv.GetPad(2).YtoPixel(0))
         
                 pad1XaxisFactor = defaultYtoPixel / pad1YtoPixel
-                pad1YaxisFactor = defaultXtoPixel / pad1XtoPixel
+                # pad1YaxisFactor = defaultXtoPixel / pad1XtoPixel
                 pad2XaxisFactor = defaultYtoPixel / pad2YtoPixel
-                pad2YaxisFactor = defaultXtoPixel / pad2XtoPixel
+                # pad2YaxisFactor = defaultXtoPixel / pad2XtoPixel
                 
                 # Do some magic with the sizes so the titles look equal
                 histPull.GetXaxis().SetLabelSize(stack.GetXaxis().GetLabelSize()*pad2XaxisFactor)
@@ -443,6 +460,10 @@ class Plotter(object):
                 else:
                     cv.Print(self._directory + "/" + plotName + "." + ending)
             cv.Print(self._directory + "/summary_"+title+".ps")
+
+            if outFile:
+                outFile.Write()
+                outFile.Close()
         
         multicv.Print(self._directory+"/summary_"+title+".ps]", "PORTRAIT")
         
