@@ -259,7 +259,7 @@ class Plotter(object):
                 histSumMC.Add(stackHist)
             
             scales = []
-            if self._scaleSignal == "integral":
+            if self._scaleSignal == "integral" and not saveRoot:
                 for key in separateHistograms.keys():
                     if key not in self._datasampleIds:
                         hist = separateHistograms[key]

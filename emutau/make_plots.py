@@ -7,8 +7,8 @@ from Plotter import Plotter
 
 if __name__ == '__main__':
     variables = [
-    {'var':'BDTG', 'varname':'BDTG', 'legend':'top left', 'logy':False, 'title':'BDT score', 'unit':'', 'nbinsx':10, 'xmin':-1., 'xmax':1.0001},
-    {'var':'Fisher', 'varname':'Fisher', 'legend':'top left', 'logy':False, 'title':'Fisher score', 'unit':'', 'nbinsx':10, 'xmin':-1., 'xmax':1.0001},
+    {'var':'BDTG', 'varname':'BDTG', 'legend':'top left', 'logy':False, 'title':'BDT score', 'unit':'', 'nbinsx':10, 'xmin':-1., 'xmax':1.0001, 'save':True},
+    {'var':'Fisher', 'varname':'Fisher', 'legend':'top left', 'logy':False, 'title':'Fisher score', 'unit':'', 'nbinsx':10, 'xmin':-1., 'xmax':1.0001, 'save':True},
     {'var':'bdt_evt_missing_et', 'varname':'bdt_evt_missing_et', 'legend':'top right', 'logy':False, 'title':'E_{T}^{miss}', 'unit':'GeV', 'nbinsx':20, 'xmin':0., 'xmax':300.},
     {'var':'bdt_evt_centrality', 'varname':'bdt_evt_centrality', 'legend':'top right', 'logy':False, 'title':'Centrality', 'unit':'', 'nbinsx':20, 'xmin':0., 'xmax':1.},
     {'var':'bdt_evt_sphericity', 'varname':'bdt_evt_sphericity', 'legend':'top right', 'logy':False, 'title':'Sphericity', 'unit':'', 'nbinsx':12, 'xmin':0., 'xmax':1.},
@@ -57,6 +57,15 @@ if __name__ == '__main__':
     {'var':'bdt_evt_dr_mujet_csv', 'varname':'bdt_evt_dr_mujet_csv', 'legend':'top right', 'logy':False, 'title':'CSV jet near #mu', 'unit':'', 'nbinsx':15, 'xmin':0., 'xmax':1.0001},
     {'var':'bdt_evt_dr_ejet_csv', 'varname':'bdt_evt_dr_ejet_csv', 'legend':'top right', 'logy':False, 'title':'CSV jet near e', 'unit':'', 'nbinsx':15, 'xmin':0., 'xmax':1.0001},
     {'var':'bdt_evt_dr_taujet_csv', 'varname':'bdt_evt_dr_taujet_csv', 'legend':'top right', 'logy':False, 'title':'CSV jet near #tau', 'unit':'', 'nbinsx':15, 'xmin':0., 'xmax':1.0001},
+    {'var':'log(abs(bdt_muon_dB3D))', 'varname':'bdt_muon_dB3D', 'legend':'top right', 'logy':False, 'title':'#mu log(|dB_{3D}|)', 'unit':'log(cm)', 'nbinsx':15, 'xmin':-10., 'xmax':0.},
+    {'var':'log(abs(bdt_muon_dz))', 'varname':'bdt_muon_dz', 'legend':'top right', 'logy':False, 'title':'#mu log(|d_{z}|)', 'unit':'log(cm)', 'nbinsx':15, 'xmin':-10., 'xmax':0.},
+    {'var':'log(abs(bdt_muon_dxy))', 'varname':'bdt_muon_dxy', 'legend':'top right', 'logy':False, 'title':'#mu log(|d_{xy}|)', 'unit':'log(cm)', 'nbinsx':15, 'xmin':-10., 'xmax':0.},
+    {'var':'log(abs(bdt_electron_dB3D))', 'varname':'bdt_electron_dB3D', 'legend':'top right', 'logy':False, 'title':'e log(|dB_{3D}|)', 'unit':'log(cm)', 'nbinsx':15, 'xmin':-10., 'xmax':0.},
+    {'var':'log(abs(bdt_electron_dz))', 'varname':'bdt_electron_dz', 'legend':'top right', 'logy':False, 'title':'e log(|d_{z}|)', 'unit':'log(cm)', 'nbinsx':15, 'xmin':-10., 'xmax':0.},
+    {'var':'log(abs(bdt_electron_dxy))', 'varname':'bdt_electron_dxy', 'legend':'top right', 'logy':False, 'title':'e log(|d_{xy}|)', 'unit':'log(cm)', 'nbinsx':15, 'xmin':-10., 'xmax':0.},
+    {'var':'log(abs(bdt_tau_dB3D))', 'varname':'bdt_tau_dB3D', 'legend':'top right', 'logy':False, 'title':'tau log(|dB_{3D}|)', 'unit':'log(cm)', 'nbinsx':15, 'xmin':-10., 'xmax':0.},
+    {'var':'log(abs(bdt_tau_dz))', 'varname':'bdt_tau_dz', 'legend':'top right', 'logy':False, 'title':'tau log(|d_{z}|)', 'unit':'log(cm)', 'nbinsx':15, 'xmin':-10., 'xmax':0.},
+    {'var':'log(abs(bdt_tau_dxy))', 'varname':'bdt_tau_dxy', 'legend':'top right', 'logy':False, 'title':'tau log(|d_{xy}|)', 'unit':'log(cm)', 'nbinsx':15, 'xmin':-10., 'xmax':0.},
 
     ]
 
