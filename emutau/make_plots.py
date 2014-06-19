@@ -32,6 +32,7 @@ if __name__ == '__main__':
     {'var':'bdt_evt_LT', 'varname':'bdt_evt_LT', 'legend':'top right', 'logy':False, 'title':'#Sigma lepton p_{T}', 'unit':'GeV', 'nbinsx':10, 'xmin':0., 'xmax':300.},
     {'var':'bdt_evt_L2T', 'varname':'bdt_evt_L2T', 'legend':'top right', 'logy':False, 'title':'m_{vis}(#tau, l_{2})', 'unit':'GeV', 'nbinsx':10, 'xmin':0., 'xmax':200.},
     {'var':'bdt_evt_nbjet', 'varname':'bdt_evt_nbjet', 'legend':'top right', 'logy':False, 'title':'N_{b jet}', 'unit':'GeV', 'nbinsx':5, 'xmin':-0.5, 'xmax':4.5},
+    {'var':'bdt_evt_nbjet10', 'varname':'bdt_evt_nbjet10', 'legend':'top right', 'logy':False, 'title':'N_{b jet} (10 GeV)', 'unit':'GeV', 'nbinsx':5, 'xmin':-0.5, 'xmax':4.5},
     {'var':'bdt_evt_HT', 'varname':'bdt_evt_HT', 'legend':'top right', 'logy':False, 'title':'#Sigma p_{T} (jets, leptons)', 'unit':'GeV', 'nbinsx':10, 'xmin':100., 'xmax':600.},
     {'var':'abs(bdt_evt_deltaeta)', 'varname':'abs_bdt_evt_deltaeta', 'legend':'top right', 'logy':False, 'title':'|#Delta #eta(forward jet, muon)|', 'unit':'GeV', 'nbinsx':5, 'xmin':0., 'xmax':5.},
     {'var':'abs(bdt_muon_eta-bdt_tau_eta)', 'varname':'abs_bdt_muon_eta_MINUS_bdt_tau_eta', 'legend':'top right', 'logy':False, 'title':'|#Delta #eta(#mu, #tau)|', 'unit':'GeV', 'nbinsx':5, 'xmin':0., 'xmax':5.},
@@ -45,9 +46,11 @@ if __name__ == '__main__':
     {'var':'abs(bdt_evt_dphi_mete)', 'varname':'abs_bdt_evt_dphi_mete', 'legend':'top right', 'logy':False, 'title':'|#Delta #phi(E_{T}^{miss}, e)|', 'unit':'', 'nbinsx':5, 'xmin':0., 'xmax':3.1415927},
     {'var':'abs(bdt_evt_dphi_metmu)', 'varname':'abs_bdt_evt_dphi_metmu', 'legend':'top right', 'logy':False, 'title':'|#Delta #phi(E_{T}^{miss}, #mu)|', 'unit':'', 'nbinsx':5, 'xmin':0., 'xmax':3.1415927},
     {'var':'abs(bdt_evt_dphi_mettau)', 'varname':'abs_bdt_evt_dphi_mettau', 'legend':'top right', 'logy':False, 'title':'|#Delta #phi(E_{T}^{miss}, #tau)|', 'unit':'', 'nbinsx':5, 'xmin':0., 'xmax':3.1415927},
-    {'var':'bdt_muon_jet_csv', 'varname':'bdt_muon_jet_csv', 'legend':'top right', 'logy':False, 'title':'CSV #mu jet', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':1.00001},
+    {'var':'bdt_muon_jet_csv', 'varname':'bdt_muon_jet_csv_10', 'legend':'top right', 'logy':False, 'title':'CSV #mu jet (10 GeV)', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':1.00001},
+    {'var':'bdt_muon_jet_csv_10', 'varname':'bdt_muon_jet_csv', 'legend':'top right', 'logy':False, 'title':'CSV #mu jet', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':1.00001},
     {'var':'bdt_tau_jet_csv', 'varname':'bdt_tau_jet_csv', 'legend':'top right', 'logy':False, 'title':'CSV #tau jet', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':1.00001},
     {'var':'bdt_electron_jet_csv', 'varname':'bdt_electron_jet_csv', 'legend':'top right', 'logy':False, 'title':'CSV e jet', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':1.00001},
+    {'var':'bdt_electron_jet_csv', 'varname':'bdt_electron_jet_csv_10', 'legend':'top right', 'logy':False, 'title':'CSV e jet (10 GeV)', 'unit':'', 'nbinsx':10, 'xmin':0., 'xmax':1.00001},
     {'var':'abs(bdt_muon_pdg)', 'varname':'bdt_muon_pdg', 'legend':'top right', 'logy':False, 'title':'PDG muon match', 'unit':'', 'nbinsx':16, 'xmin':-0.5, 'xmax':15.5},
     {'var':'abs(bdt_electron_pdg)', 'varname':'bdt_electron_pdg', 'legend':'top right', 'logy':False, 'title':'PDG electron match', 'unit':'', 'nbinsx':16, 'xmin':-0.5, 'xmax':15.5},
     {'var':'abs(bdt_tau_pdg)', 'varname':'bdt_tau_pdg', 'legend':'top right', 'logy':False, 'title':'PDG tau match', 'unit':'', 'nbinsx':16, 'xmin':-0.5, 'xmax':15.5},
@@ -70,18 +73,33 @@ if __name__ == '__main__':
     ]
 
     sampleDict = {
-        0:{'name':'WZ', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'WZ'},
-        1:{'name':'ZZ', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':'ZZ'},
-        2:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,250), 'label':'t#bar{t} (1l)'},
-        3:{'name':'tt2l', 'colour':ROOT.TColor.GetColor(155,152,204), 'label':'t#bar{t} (2l)'},
-        4:{'name':'ttW', 'colour':ROOT.TColor.kGreen + 2, 'label':'t#bar{t}W'},
-        5:{'name':'ttZ', 'colour':ROOT.TColor.kGreen + 3, 'label':'t#bar{t}Z'},
-        6:{'name':'tH_YtMinus', 'colour':ROOT.TColor.kRed + 3, 'label':'tH (y_{t}=-1)'},
-        7:{'name':'ttH', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':'t#bar{t}H'},
-        8:{'name':'reducible', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'Reducible'},
-        9:{'name':'data', 'colour':1, 'label':'Data'}, # FIXME: 100?
+        1:{'name':'WW', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'Diboson'},
+        1:{'name':'WZ', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'Diboson'},
+        2:{'name':'ZZ', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'Diboson'},
+        3:{'name':'tt0l', 'colour':ROOT.TColor.GetColor(155,133,296), 'label':'t#bar{t} (0l)'},
+        4:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,250), 'label':'t#bar{t} (1l)'},
+        5:{'name':'tt2l', 'colour':ROOT.TColor.GetColor(155,152,204), 'label':'t#bar{t} (2l)'},
+
+        # # 6:{'name':'DY', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'DY'},
+        # 7:{'name':'DY1', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'DY'},
+        # 8:{'name':'DY2', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'DY'},
+        # 9:{'name':'DY3', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'DY'},
+        # 10:{'name':'DY4', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'DY'},
+
+        # # 11:{'name':'Wjet', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'W'},
+        # 12:{'name':'W1jet', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'W'},
+        # 13:{'name':'W2jet', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'W'},
+        # 14:{'name':'W3jet', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'W'},
+        # 15:{'name':'W4jet', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'W'},
+        17:{'name':'ttW', 'colour':ROOT.TColor.kGreen + 2, 'label':'t#bar{t}W/Z'},
+        18:{'name':'ttZ', 'colour':ROOT.TColor.kGreen + 2, 'label':'t#bar{t}W/Z'}, #'label':'t#bar{t}Z'
+        16:{'name':'tH_YtMinus', 'colour':ROOT.TColor.kRed + 3, 'label':'tH (y_{t}=-1)'},
+        19:{'name':'ttH', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':'t#bar{t}H'},
+        20:{'name':'reducible', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'Reducible'},
+        # 100:{'name':'data', 'colour':1, 'label':'Data'}, # FIXME: 100?
     }
-    p = Plotter(variables, sampleDict, fileName="BDT_training_mva.root")
+    p = Plotter(variables, sampleDict, fileName="BDT_training_mva.root",
+        signalsampleIds=[16], datasampleIds=[100])
     p.readTuples()
     p.makePlots(weight='bdt_evt_weight')
     

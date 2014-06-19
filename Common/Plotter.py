@@ -187,6 +187,7 @@ class Plotter(object):
                 #     tuples = self._tuplesDown
                  
                 for sampleId in self._sampleDict:
+
                     # for iTuple, ntuple in enumerate(tuples[sampleId]):
                     # histName = plotName+str(sampleId)+mode
                     histName = plotName + self._sampleDict[sampleId]['name']
@@ -207,8 +208,6 @@ class Plotter(object):
                             stackHistograms.append(hist)
                             hist.SetFillStyle(1001)
                         else:
-                            if sampleId not in separateHistograms:
-                                separateHistograms[sampleId] = hist
                             hist.SetFillStyle(0)
                             hist.SetLineWidth(2)
                             print 'Appending data or signal histogram', sampleId
@@ -226,13 +225,12 @@ class Plotter(object):
                     if self._underFlowFirstBin:
                         underflow = hist.GetBinContent(0)
                         hist.SetBinContent(1, hist.GetBinContent(1) + underflow)
-                    
-                    if sampleId in separateHistograms:
-                        #print "Before:", separateHistograms[sampleId].Integral()
+
+                    print hist.Integral(0, hist.GetNbinsX()+2)
+                    if sampleId not in separateHistograms:
+                        separateHistograms[sampleId] = hist
+                    else:
                         separateHistograms[sampleId].Add(hist)
-                        #print sampleId
-                        #print "Adding to existing hist"
-                        #print "After:", separateHistograms[sampleId].Integral()
                     
                     if sampleId not in self._signalsampleIds:
                         if mode == "up":
@@ -260,6 +258,7 @@ class Plotter(object):
             
             scales = []
             if self._scaleSignal == "integral" and not saveRoot:
+                print '!!!!!!!!!!!!!!!!!!!!!!!!!'
                 for key in separateHistograms.keys():
                     if key not in self._datasampleIds:
                         hist = separateHistograms[key]
@@ -295,6 +294,7 @@ class Plotter(object):
             # Save stuff
             if outFile:
                 for h in histograms:
+                    print 'saving hist', h.Integral(), h.GetName()
                     h.Write()
                 outFile.Write()
 

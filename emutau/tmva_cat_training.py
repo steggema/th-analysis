@@ -11,6 +11,8 @@ tree = tfile.Get('Tree')
 # 'bdt_evt_HT', 'abs(bdt_evt_deltaeta)', 'abs(bdt_muon_eta-bdt_tau_eta)', 'abs(bdt_muon_eta-bdt_electron_eta)', 'abs(bdt_electron_eta-bdt_tau_eta)', 'bdt_evt_maxMT', 'abs(bdt_evt_dphi_mete)', 'abs(bdt_evt_dphi_metmu)', 'abs(bdt_evt_dphi_mettau)']#, 'bdt_tau_decaymode', 'bdt_muon_charge',
 
 training_vars = ['bdt_evt_max_jet_eta','bdt_evt_njet_or30', 'bdt_evt_sphericity', 'bdt_evt_aplanarity']
+# training_vars = ['bdt_evt_max_jet_eta','bdt_evt_njet_or30', 'bdt_evt_sphericity', 'bdt_evt_aplanarity', 'log(abs(bdt_muon_dz))', 'bdt_evt_sleading_btag_pt', 'bdt_muon_jet_csv']
+
 # training_vars = ['bdt_evt_nbjet', 'bdt_evt_centrality', 'bdt_muon_charge', 'bdt_evt_HT']
 
 # training_vars = ['bdt_evt_centrality', 'abs(bdt_evt_dphi_metmu)', 'bdt_evt_maxMT', 'bdt_evt_missing_et']
@@ -18,9 +20,9 @@ obs_vars = []
 
 
 basic_selection = ''
-signal_selection = '(bdt_evt_isSignal > 0.5 && bdt_evt_processid==6)' #tH -1
+signal_selection = '(bdt_evt_isSignal > 0.5 && bdt_evt_processid==16)' #tH -1
 # signal_selection = '(bdt_evt_processid==7)' #ttH
-background_selection = '(bdt_evt_isSignal < 0.5 && bdt_evt_processid < 50 && (!{signal}))'.format(signal=signal_selection) # no data!
+background_selection = '(bdt_evt_isSignal < 0.5 && bdt_evt_processid != 20 && bdt_evt_processid < 50 && (!{signal}))'.format(signal=signal_selection) # no data!
 
 if '7' in signal_selection:
     signal_selection += '*(bdt_evt_njet_or30>1)'

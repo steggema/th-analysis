@@ -23,6 +23,10 @@ def convertCompositeVariables(compositeVariables, readerVarDict):
             val = readerVarDict['bdt_evt_max_jet_eta30'][0]
             readerVarDict[variableExpression][0] = val if val >0. else 0.
             continue
+        elif variableExpression == 'log(abs(bdt_muon_dz))':
+            val = readerVarDict['bdt_muon_dz'][0]
+            readerVarDict[variableExpression][0] = math.log(abs(val))
+            continue
         elif 'abs' in variableExpression and '-' in variableExpression:
             vars = variableExpression.strip('abs')
             vars = vars.strip(' (')
