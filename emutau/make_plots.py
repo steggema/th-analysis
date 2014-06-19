@@ -8,7 +8,7 @@ from Plotter import Plotter
 if __name__ == '__main__':
     variables = [
     {'var':'BDTG', 'varname':'BDTG', 'legend':'top left', 'logy':False, 'title':'BDT score', 'unit':'', 'nbinsx':10, 'xmin':-1., 'xmax':1.0001, 'save':True},
-    {'var':'Fisher', 'varname':'Fisher', 'legend':'top left', 'logy':False, 'title':'Fisher score', 'unit':'', 'nbinsx':10, 'xmin':-1., 'xmax':1.0001, 'save':True},
+    {'var':'Fisher', 'varname':'Fisher', 'legend':'top left', 'logy':False, 'title':'Fisher score', 'unit':'', 'nbinsx':10, 'xmin':-0.75, 'xmax':0.75, 'save':True},
     {'var':'bdt_evt_missing_et', 'varname':'bdt_evt_missing_et', 'legend':'top right', 'logy':False, 'title':'E_{T}^{miss}', 'unit':'GeV', 'nbinsx':20, 'xmin':0., 'xmax':300.},
     {'var':'bdt_evt_centrality', 'varname':'bdt_evt_centrality', 'legend':'top right', 'logy':False, 'title':'Centrality', 'unit':'', 'nbinsx':20, 'xmin':0., 'xmax':1.},
     {'var':'bdt_evt_sphericity', 'varname':'bdt_evt_sphericity', 'legend':'top right', 'logy':False, 'title':'Sphericity', 'unit':'', 'nbinsx':12, 'xmin':0., 'xmax':1.},
@@ -76,9 +76,9 @@ if __name__ == '__main__':
         1:{'name':'WW', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'Diboson'},
         1:{'name':'WZ', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'Diboson'},
         2:{'name':'ZZ', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'Diboson'},
-        3:{'name':'tt0l', 'colour':ROOT.TColor.GetColor(155,133,296), 'label':'t#bar{t} (0l)'},
-        4:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,250), 'label':'t#bar{t} (1l)'},
-        5:{'name':'tt2l', 'colour':ROOT.TColor.GetColor(155,152,204), 'label':'t#bar{t} (2l)'},
+        # 3:{'name':'tt0l', 'colour':ROOT.TColor.GetColor(155,133,296), 'label':'t#bar{t} (0l)'},
+        # 4:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,250), 'label':'t#bar{t} (1l)'},
+        # 5:{'name':'tt2l', 'colour':ROOT.TColor.GetColor(155,152,204), 'label':'t#bar{t} (2l)'},
 
         # # 6:{'name':'DY', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'DY'},
         # 7:{'name':'DY1', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'DY'},

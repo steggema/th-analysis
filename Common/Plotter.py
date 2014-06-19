@@ -211,6 +211,10 @@ class Plotter(object):
                             hist.SetFillStyle(0)
                             hist.SetLineWidth(2)
                             print 'Appending data or signal histogram', sampleId
+                            if sampleId not in separateHistograms:
+                                separateHistograms[sampleId] = hist
+                            else:
+                                separateHistograms[sampleId].Add(hist)
                         
                         hist.SetLineColor(self._sampleDict[sampleId]["colour"])
                         hist.SetFillColor(self._sampleDict[sampleId]["colour"])
@@ -227,16 +231,8 @@ class Plotter(object):
                         hist.SetBinContent(1, hist.GetBinContent(1) + underflow)
 
                     print hist.Integral(0, hist.GetNbinsX()+2)
-                    if sampleId not in separateHistograms:
-                        separateHistograms[sampleId] = hist
-                    else:
-                        separateHistograms[sampleId].Add(hist)
+
                     
-                    if sampleId not in self._signalsampleIds:
-                        if mode == "up":
-                            histSumMCup.Add(hist)
-                        elif mode == "down":
-                            histSumMCdown.Add(hist)
                     
                     # Legend entries only for nominal hist
                     if mode == "" and legendPos != "none":
@@ -258,7 +254,6 @@ class Plotter(object):
             
             scales = []
             if self._scaleSignal == "integral" and not saveRoot:
-                print '!!!!!!!!!!!!!!!!!!!!!!!!!'
                 for key in separateHistograms.keys():
                     if key not in self._datasampleIds:
                         hist = separateHistograms[key]
