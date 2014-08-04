@@ -70,7 +70,7 @@ def convertCompositeVariables(compositeVariables, readerVarDict):
 
 
 
-files = ['BDT_training.root' ]
+files = ['BDT_training_ss_f3.root'] # ['BDT_training.root' ]
 
 
 for f in files:

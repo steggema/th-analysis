@@ -8,7 +8,7 @@ from Plotter import Plotter
 if __name__ == '__main__':
     variables = [
     {'var':'BDTG', 'varname':'BDTG', 'legend':'top left', 'logy':False, 'title':'BDT score', 'unit':'', 'nbinsx':10, 'xmin':-1., 'xmax':1.0001, 'save':True},
-    {'var':'Fisher', 'varname':'Fisher', 'legend':'top left', 'logy':False, 'title':'Fisher score', 'unit':'', 'nbinsx':10, 'xmin':-0.75, 'xmax':0.75, 'save':True},
+    {'var':'Fisher', 'varname':'Fisher', 'legend':'top left', 'logy':False, 'title':'Fisher score', 'unit':'', 'nbinsx':20, 'xmin':-0.75, 'xmax':0.75, 'save':True},
     {'var':'bdt_evt_missing_et', 'varname':'bdt_evt_missing_et', 'legend':'top right', 'logy':False, 'title':'E_{T}^{miss}', 'unit':'GeV', 'nbinsx':20, 'xmin':0., 'xmax':300.},
     {'var':'bdt_evt_centrality', 'varname':'bdt_evt_centrality', 'legend':'top right', 'logy':False, 'title':'Centrality', 'unit':'', 'nbinsx':20, 'xmin':0., 'xmax':1.},
     {'var':'bdt_evt_sphericity', 'varname':'bdt_evt_sphericity', 'legend':'top right', 'logy':False, 'title':'Sphericity', 'unit':'', 'nbinsx':12, 'xmin':0., 'xmax':1.},
@@ -91,14 +91,14 @@ if __name__ == '__main__':
         # 13:{'name':'W2jet', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'W'},
         # 14:{'name':'W3jet', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'W'},
         # 15:{'name':'W4jet', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'W'},
-        17:{'name':'ttW', 'colour':ROOT.TColor.kGreen + 2, 'label':'t#bar{t}W/Z'},
-        18:{'name':'ttZ', 'colour':ROOT.TColor.kGreen + 2, 'label':'t#bar{t}W/Z'}, #'label':'t#bar{t}Z'
+        17:{'name':'ttW', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':'t#bar{t}W/Z'},
+        18:{'name':'ttZ', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':'t#bar{t}W/Z'}, #'label':'t#bar{t}Z'
         16:{'name':'tH_YtMinus', 'colour':ROOT.TColor.kRed + 3, 'label':'tH (y_{t}=-1)'},
-        19:{'name':'ttH', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':'t#bar{t}H'},
+        19:{'name':'ttH', 'colour':ROOT.TColor.GetColor(100,182,232), 'label':'t#bar{t}H'},
         20:{'name':'reducible', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'Reducible'},
-        # 100:{'name':'data', 'colour':1, 'label':'Data'}, # FIXME: 100?
+        100:{'name':'data', 'colour':1, 'label':'Data'}, # FIXME: 100?
     }
-    p = Plotter(variables, sampleDict, fileName="BDT_training_mva.root",
+    p = Plotter(variables, sampleDict, fileName="BDT_training_ss_f3_mva.root", directory='F3',
         signalsampleIds=[16], datasampleIds=[100])
     p.readTuples()
     p.makePlots(weight='bdt_evt_weight')

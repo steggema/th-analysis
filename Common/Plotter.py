@@ -146,9 +146,9 @@ class Plotter(object):
                 #legend = ROOT.TLegend(0.55, 0.29, 0.92, 0.92, "", "NDC") #FIXME: More legend positions for the future!
                 
                 if legendPos == "top left":
-                    legend = ROOT.TLegend(0.19, 0.32, 0.45, 0.92, "", "NDC") #FIXME: More legend positions for the future!
+                    legend = ROOT.TLegend(0.19, 0.52, 0.45, 0.92, "", "NDC") #FIXME: More legend positions for the future!
                 else:
-                    legend = ROOT.TLegend(0.66, 0.32, 0.92, 0.92, "", "NDC") #FIXME: More legend positions for the future!
+                    legend = ROOT.TLegend(0.66, 0.52, 0.92, 0.92, "", "NDC") #FIXME: More legend positions for the future!
                     
                 legendEntries = {}
             
@@ -584,8 +584,8 @@ if __name__ == '__main__':
         1:{'name':'ZZ', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':'ZZ'},
         2:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,204), 'label':'t#bar{t} (1l)'},
         3:{'name':'tt2l', 'colour':ROOT.TColor.GetColor(155,152,204), 'label':'t#bar{t} (2l)'},
-        4:{'name':'ttW', 'colour':ROOT.TColor.kGreen + 2, 'label':'t#bar{t}W'},
-        5:{'name':'ttZ', 'colour':ROOT.TColor.kGreen + 3, 'label':'t#bar{t}Z'},
+        4:{'name':'ttW', 'colour':ROOT.TColor.TColor.GetColor(100,182,232) , 'label':'t#bar{t}W'},
+        5:{'name':'ttZ', 'colour':ROOT.TColor.TColor.GetColor(100,182,232) , 'label':'t#bar{t}Z'},
         6:{'name':'tH_YtMinus', 'colour':ROOT.TColor.kRed + 3, 'label':'tH (y_{t}=-1)'},
         7:{'name':'ttH', 'colour':ROOT.TColor.GetColor(248,206,104), 'label':'t#bar{t}H'},
         8:{'name':'reducible', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'Reducible'},
