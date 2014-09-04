@@ -76,9 +76,11 @@ if __name__ == '__main__':
         1:{'name':'WW', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'Diboson'},
         1:{'name':'WZ', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'Diboson'},
         2:{'name':'ZZ', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'Diboson'},
-        # 3:{'name':'tt0l', 'colour':ROOT.TColor.GetColor(155,133,296), 'label':'t#bar{t} (0l)'},
-        # 4:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,250), 'label':'t#bar{t} (1l)'},
-        # 5:{'name':'tt2l', 'colour':ROOT.TColor.GetColor(155,152,204), 'label':'t#bar{t} (2l)'},
+        3:{'name':'tt0l', 'colour':ROOT.TColor.GetColor(155,133,296), 'label':'t#bar{t}'},
+        4:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,296), 'label':'t#bar{t}'},
+        5:{'name':'tt2l', 'colour':ROOT.TColor.GetColor(155,152,296), 'label':'t#bar{t}'},
+        # 4:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,250), 'label':'t#bar{t}'},
+        # 5:{'name':'tt2l', 'colour':ROOT.TColor.GetColor(155,152,204), 'label':'t#bar{t}'},
 
         # # 6:{'name':'DY', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'DY'},
         # 7:{'name':'DY1', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'DY'},
@@ -96,9 +98,9 @@ if __name__ == '__main__':
         16:{'name':'tH_YtMinus', 'colour':ROOT.TColor.kRed + 3, 'label':'tH (y_{t}=-1)'},
         19:{'name':'ttH', 'colour':ROOT.TColor.GetColor(100,182,232), 'label':'t#bar{t}H'},
         20:{'name':'reducible', 'colour':ROOT.TColor.GetColor(250,202,255), 'label':'Reducible'},
-        100:{'name':'data', 'colour':1, 'label':'Data'}, # FIXME: 100?
+        # 100:{'name':'data', 'colour':1, 'label':'Data'}, # FIXME: 100?
     }
-    p = Plotter(variables, sampleDict, fileName="BDT_training_ss_f3_mva.root", directory='F3',
+    p = Plotter(variables, sampleDict, fileName="BDT_training_ss_f12_mva.root", directory='plots',
         signalsampleIds=[16], datasampleIds=[100])
     p.readTuples()
     p.makePlots(weight='bdt_evt_weight')

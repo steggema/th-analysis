@@ -3,14 +3,17 @@ import numpy
 import ROOT
 TMVA_tools = ROOT.TMVA.Tools.Instance()
 
-tfile = ROOT.TFile('BDT_training.root')
+# tfile = ROOT.TFile('BDT_training.root')
+# tfile = ROOT.TFile('BDT_training_ss_f3.root')
+tfile = ROOT.TFile('/afs/cern.ch/user/y/ytakahas/public/forJan/tH_BDTtraining_20140903_byLooseIsolationMVA3oldDMwLT/BDT_training_ss_f3.root')
+
 tree = tfile.Get('Tree')
 
 
-# training_vars = ['bdt_evt_leading_btag_pt','bdt_evt_leading_btag', 'bdt_evt_max_jet_eta', '(bdt_evt_max_jet_eta30*(bdt_evt_max_jet_eta30>0.))', 'bdt_evt_njet_or30', 'bdt_evt_Met', 'bdt_evt_Mmt', 'bdt_evt_Mem', 'bdt_evt_LT',  'bdt_evt_missing_et', 'bdt_evt_nbjet', 'bdt_evt_centrality', 
+training_vars = ['bdt_evt_leading_btag_pt','bdt_evt_leading_btag', 'bdt_evt_max_jet_eta', '(bdt_evt_max_jet_eta30*(bdt_evt_max_jet_eta30>0.))', 'bdt_evt_njet_or30', 'bdt_evt_Met', 'bdt_evt_Mmt', 'bdt_evt_Mem',  'bdt_evt_missing_et', 'bdt_evt_nbjet', 'bdt_evt_centrality', 'bdt_muon_jet_csv', 'bdt_muon_charge+bdt_electron_charge+bdt_tau_charge']#'bdt_evt_LT', , 
 # 'bdt_evt_HT', 'abs(bdt_evt_deltaeta)', 'abs(bdt_muon_eta-bdt_tau_eta)', 'abs(bdt_muon_eta-bdt_electron_eta)', 'abs(bdt_electron_eta-bdt_tau_eta)', 'bdt_evt_maxMT', 'abs(bdt_evt_dphi_mete)', 'abs(bdt_evt_dphi_metmu)', 'abs(bdt_evt_dphi_mettau)']#, 'bdt_tau_decaymode', 'bdt_muon_charge',
 
-training_vars = ['bdt_evt_max_jet_eta','bdt_evt_njet_or30', 'bdt_evt_sphericity', 'bdt_evt_aplanarity']
+# training_vars = ['bdt_evt_max_jet_eta','bdt_evt_njet_or30', 'bdt_evt_sphericity', 'bdt_evt_aplanarity']
 # training_vars = ['bdt_evt_max_jet_eta','bdt_evt_njet_or30', 'bdt_evt_sphericity', 'bdt_evt_aplanarity', 'log(abs(bdt_muon_dz))', 'bdt_evt_sleading_btag_pt', 'bdt_muon_jet_csv']
 
 # training_vars = ['bdt_evt_nbjet', 'bdt_evt_centrality', 'bdt_muon_charge', 'bdt_evt_HT']
@@ -22,7 +25,8 @@ obs_vars = []
 basic_selection = ''
 signal_selection = '(bdt_evt_isSignal > 0.5 && bdt_evt_processid==16)' #tH -1
 # signal_selection = '(bdt_evt_processid==7)' #ttH
-background_selection = '(bdt_evt_isSignal < 0.5 && bdt_evt_processid != 20 && bdt_evt_processid < 50 && (!{signal}))'.format(signal=signal_selection) # no data!
+# background_selection = '(bdt_evt_isSignal < 0.5 && bdt_evt_processid != 20 && bdt_evt_processid < 50 && (!{signal}))'.format(signal=signal_selection) # no data!
+background_selection = '(bdt_evt_isSignal < 0.5 && bdt_evt_processid < 50 && (!{signal}))'.format(signal=signal_selection)
 
 if '7' in signal_selection:
     signal_selection += '*(bdt_evt_njet_or30>1)'
