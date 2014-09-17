@@ -73,7 +73,7 @@ def convertCompositeVariables(compositeVariables, readerVarDict):
 # files = ['BDT_training_ss_f3.root'] # ['BDT_training.root' ]
 # files = ['BDT_training.root' ]
 # files = ['/afs/cern.ch/user/y/ytakahas/public/forJan/tH_BDTtraining_20140830/BDT_training_ss_f12.root' ]
-files = ['/afs/cern.ch/user/y/ytakahas/public/forJan/tH_BDTtraining_20140903_byLooseIsolationMVA3oldDMwLT/BDT_training_ss_f12.root' ]
+files = ['/afs/cern.ch/user/y/ytakahas/public/forJan/tH_BDTtraining_20140917/BDT_training_ss_f12.root' ]
 
 
 

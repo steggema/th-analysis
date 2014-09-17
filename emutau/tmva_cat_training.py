@@ -5,7 +5,7 @@ TMVA_tools = ROOT.TMVA.Tools.Instance()
 
 # tfile = ROOT.TFile('BDT_training.root')
 # tfile = ROOT.TFile('BDT_training_ss_f3.root')
-tfile = ROOT.TFile('/afs/cern.ch/user/y/ytakahas/public/forJan/tH_BDTtraining_20140903_byLooseIsolationMVA3oldDMwLT/BDT_training_ss_f3.root')
+tfile = ROOT.TFile('/afs/cern.ch/user/y/ytakahas/public/forJan/tH_BDTtraining_20140917/BDT_training_ss_f3.root')
 
 tree = tfile.Get('Tree')
 
