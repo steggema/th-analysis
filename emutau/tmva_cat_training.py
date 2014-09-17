@@ -1,13 +1,6 @@
-import numpy
+import optparse
 
 import ROOT
-TMVA_tools = ROOT.TMVA.Tools.Instance()
-
-# tfile = ROOT.TFile('BDT_training.root')
-# tfile = ROOT.TFile('BDT_training_ss_f3.root')
-tfile = ROOT.TFile('/afs/cern.ch/user/y/ytakahas/public/forJan/tH_BDTtraining_20140917/BDT_training_ss_f3.root')
-
-tree = tfile.Get('Tree')
 
 
 training_vars = ['bdt_evt_leading_btag_pt','bdt_evt_leading_btag', 'bdt_evt_max_jet_eta', '(bdt_evt_max_jet_eta30*(bdt_evt_max_jet_eta30>0.))', 'bdt_evt_njet_or30', 'bdt_evt_Met', 'bdt_evt_Mmt', 'bdt_evt_Mem',  'bdt_evt_missing_et', 'bdt_evt_nbjet', 'bdt_evt_centrality', 'bdt_muon_jet_csv', 'bdt_muon_charge+bdt_electron_charge+bdt_tau_charge']#'bdt_evt_LT', , 
@@ -19,8 +12,8 @@ training_vars = ['bdt_evt_leading_btag_pt','bdt_evt_leading_btag', 'bdt_evt_max_
 # training_vars = ['bdt_evt_nbjet', 'bdt_evt_centrality', 'bdt_muon_charge', 'bdt_evt_HT']
 
 # training_vars = ['bdt_evt_centrality', 'abs(bdt_evt_dphi_metmu)', 'bdt_evt_maxMT', 'bdt_evt_missing_et']
-obs_vars = []
 
+obs_vars = []
 
 basic_selection = ''
 signal_selection = '(bdt_evt_isSignal > 0.5 && bdt_evt_processid==16)' #tH -1
@@ -32,25 +25,41 @@ if '7' in signal_selection:
     signal_selection += '*(bdt_evt_njet_or30>1)'
     background_selection += '*(bdt_evt_njet_or30>1)'
 
-num_pass = tree.GetEntries(signal_selection)
-num_fail = tree.GetEntries(background_selection)
+def parse_options():
+    usage = '''
+%prog [options]
+'''
+    parser = optparse.OptionParser(usage)
+    parser.add_option('-i', '--input', dest='input_file', help='input file name', default='/afs/cern.ch/user/y/ytakahas/public/forJan/tH_BDTtraining_20140917/BDT_training_ss_f3.root', type='string')
+    parser.add_option('-o', '--out_postfix', dest='out_postfix', help='output file postfix', default='', type='string')
+    opts, args = parser.parse_args()
+    return opts, args
 
-h = ROOT.TH1F('int', 'int', 1, -0.5, 1.5)
+def train(fileName, postfix):
+    TMVA_tools = ROOT.TMVA.Tools.Instance()
 
-tree.Project('int', '1.', '{sel}*bdt_evt_weight'.format(sel=signal_selection))
+    tfile = ROOT.TFile(fileName, postfix)
 
-print 'Integral signal', h.Integral()
+    tree = tfile.Get('Tree')
 
-tree.Project('int', '1.', '{sel}*bdt_evt_weight'.format(sel=background_selection))
+    num_pass = tree.GetEntries(signal_selection)
+    num_fail = tree.GetEntries(background_selection)
 
-print 'Background signal', h.Integral()
+    h = ROOT.TH1F('int', 'int', 1, -0.5, 1.5)
 
-print 'N events signal', num_pass
-print 'N events background', num_fail
+    tree.Project('int', '1.', '{sel}*bdt_evt_weight'.format(sel=signal_selection))
+
+    print 'Integral signal', h.Integral()
+
+    tree.Project('int', '1.', '{sel}*bdt_evt_weight'.format(sel=background_selection))
+
+    print 'Background signal', h.Integral()
+
+    print 'N events signal', num_pass
+    print 'N events background', num_fail
 
 
-def train():
-    outFile = ROOT.TFile('TMVA_classification.root', 'RECREATE')
+    outFile = ROOT.TFile('TMVA_classification{postfix}.root'.format(postfix=postfix), 'RECREATE')
 
     factory    = ROOT.TMVA.Factory(
         "TMVAClassification", 
@@ -70,22 +79,21 @@ def train():
     factory.PrepareTrainingAndTestTree( ROOT.TCut(signal_selection), ROOT.TCut(background_selection),
                                         "nTrain_Signal=0:nTest_Background=0:SplitMode=Random:NormMode=NumEvents:!V" )
 
-
     # factory.BookMethod(ROOT.TMVA.Types.kBDT, "BDTG","!H:!V:NTrees=250::BoostType=Grad:Shrinkage=0.05:UseBaggedBoost:GradBaggingFraction=0.9:nCuts=500:MaxDepth=4:MinNodeSize=5" )
 
     # Optimized:
     # factory.BookMethod(ROOT.TMVA.Types.kBDT, "BDTG","!H:!V:NTrees=250::BoostType=Grad:Shrinkage=0.275:UseBaggedBoost:GradBaggingFraction=0.9:nCuts=500:MaxDepth=2:MinNodeSize=15" )
     # Re-Optimized:
     # factory.BookMethod(ROOT.TMVA.Types.kBDT, "BDTG","!H:!V:NTrees=1000::BoostType=Grad:Shrinkage=0.5:UseBaggedBoost:GradBaggingFraction=0.9:nCuts=500:MaxDepth=2:MinNodeSize=1" )
-    factory.BookMethod(ROOT.TMVA.Types.kBDT, "BDTG","!H:!V:NTrees=500::BoostType=Grad:Shrinkage=0.05:UseBaggedBoost:GradBaggingFraction=0.9:nCuts=500:MaxDepth=4:MinNodeSize=10" )
+    factory.BookMethod(ROOT.TMVA.Types.kBDT, "BDTG"+postfix, "!H:!V:NTrees=500::BoostType=Grad:Shrinkage=0.05:UseBaggedBoost:GradBaggingFraction=0.9:nCuts=500:MaxDepth=4:MinNodeSize=10" )
 
 
     # factory.BookMethod(ROOT.TMVA.Types.kBDT, "BDT_TOP", "!H:!V:NTrees=400:BoostType=AdaBoost:SeparationType=GiniIndex:nCuts=50:AdaBoostBeta=0.005:MaxDepth=5")
     # Optimizerd:
-    factory.BookMethod(ROOT.TMVA.Types.kBDT, "BDT_TOP", "!H:!V:NTrees=400:BoostType=AdaBoost:SeparationType=GiniIndex:nCuts=50:AdaBoostBeta=0.2:MaxDepth=2:MinNodeSize=6")
+    factory.BookMethod(ROOT.TMVA.Types.kBDT, "BDT_TOP"+postfix, "!H:!V:NTrees=400:BoostType=AdaBoost:SeparationType=GiniIndex:nCuts=50:AdaBoostBeta=0.2:MaxDepth=2:MinNodeSize=6")
 
-    factory.BookMethod( ROOT.TMVA.Types.kFisher, "Fisher", "H:!V:Fisher:CreateMVAPdfs:PDFInterpolMVAPdf=Spline2:NbinsMVAPdf=50:NsmoothMVAPdf=10" )
-    factory.BookMethod( ROOT.TMVA.Types.kFisher, "Fisher2", "H:!V:Mahalanobis" )
+    factory.BookMethod( ROOT.TMVA.Types.kFisher, "Fisher"+postfix, "H:!V:Fisher:CreateMVAPdfs:PDFInterpolMVAPdf=Spline2:NbinsMVAPdf=50:NsmoothMVAPdf=10" )
+    # factory.BookMethod( ROOT.TMVA.Types.kFisher, "Fisher2"+postfix, "H:!V:Mahalanobis" )
 
     # factory.BookMethod( ROOT.TMVA.Types.kSVM, "SVM", "Gamma=0.25:Tol=0.001:VarTransform=Norm" )
 # --- OptimizeConfigParamete...: For BDT_TOP the optimized Parameters are: 
@@ -123,110 +131,9 @@ def train():
     # ROOT.TMVARegGui('TMVA.root')
 
 
-
-def read():
-    import array
-
-    reader = ROOT.TMVA.Reader('TMVAClassification_BDTG')
-
-    varDict = {}
-    for var in training_vars:
-        varDict[var] = array.array('f',[0])
-        reader.AddVariable(var, varDict[var])
-
-    reader.BookMVA("BDTG","weights/TMVAClassification_BDTG.weights.xml")
-
-    cut = 0.8
-    ngood = 0
-    nbad = 0
-
-    ASSUMEDLOSS = 8.62
-    deviation = 0.
-
-    sumLoss = 0.
-    nLoss = 0.
-
-    sumDeltaLoss = 0.
-
-    bdtOuts = []
-    losses = []
-
-    for jentry in xrange(tree.GetEntries()):
-
-        ientry = tree.LoadTree(jentry)
-        nb = tree.GetEntry(jentry)
-
-        for var in varDict:
-            varDict[var][0] = getattr(tree, var)
-
-        bdtOutput = reader.EvaluateMVA("BDTG")
-
-        loss = tree.loss
-        bdtOuts.append(bdtOutput)
-        losses.append(loss)
-
-        if jentry%1000 == 0:
-            print jentry, varDict['f1'], bdtOutput, loss
-        if loss:
-            sumLoss += loss
-            nLoss += 1.
-
-        if bdtOutput > cut:
-            sumDeltaLoss += abs(ASSUMEDLOSS - loss)
-            if not loss:
-                nbad += 1
-            else:
-                ngood += 1
-        else:
-            sumDeltaLoss += abs(loss)
-            if loss:
-                nbad += 1
-            else:
-                ngood += 1
-    
-    print 'ngood', ngood
-    print 'nbad', nbad
-
-    totalSum = float(tree.GetEntries())
-
-    print 'DeltaLoss', sumDeltaLoss/totalSum
-    print 'Average Loss:', sumLoss/nLoss
-
-    cuts = [0., 0.1, 0.2, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.7, 0.8]
-    # Also minimise assumed loss
-    for cut in cuts:
-        sumDeltaLoss = 0.
-        for i, bdtOut in enumerate(bdtOuts):
-            loss = losses[i]
-            if bdtOut > cut:
-                 sumDeltaLoss += abs(ASSUMEDLOSS - loss)
-            else:
-                 sumDeltaLoss += abs(loss)
-        print 'Cut', cut, 'DeltaLoss', sumDeltaLoss/totalSum
-
-    # BETTER EVEN: find optimal assumed loss for each bin in output BDT
-
-    BDTG = numpy.zeros(1, dtype=float)
-    loss = numpy.zeros(1, dtype=float)
-
-    fout = ROOT.TFile('trainPlusBDTG.root', 'RECREATE')
-    treeout = ROOT.TTree()
-    treeout.Branch('BDTG', BDTG, 'BDTG/D')
-    treeout.Branch('loss', loss, 'loss/D')
-
-
-    for i, bdtOut in enumerate(bdtOuts):
-        BDTG[0] = bdtOut
-        loss[0] = losses[i]
-        if i%1000==0:
-            print i, BDTG[0], loss[0]
-        treeout.Fill()
-    treeout.Write()
-    fout.Write()
-    fout.Close()
-
-
 if __name__ == '__main__':
-    train()
-    # read()
+    opts, args = parse_options()
 
+    input_file = opts.input_file
+    postfix = opts.out_postfix
+    train(input_file, postfix)

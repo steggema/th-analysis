@@ -2,6 +2,7 @@ import ROOT
 import os
 import math
 import sys
+import optparse
 
 sys.path.append("../Common")
 import NtupleTMVAEvaluate
@@ -10,6 +11,15 @@ from tmva_cat_training import training_vars
 
 TMVA_tools = ROOT.TMVA.Tools.Instance()
 
+def parse_options():
+    usage = '''
+%prog [options]
+'''
+    parser = optparse.OptionParser(usage)
+    parser.add_option('-i', '--input', dest='input_file', help='input file name', default='/afs/cern.ch/user/y/ytakahas/public/forJan/tH_BDTtraining_20140917/BDT_training_ss_f12.root', type='string')
+    parser.add_option('-o', '--out_postfix', dest='out_postfix', help='output file postfix', default='', type='string')
+    opts, args = parser.parse_args()
+    return opts, args
 
 def convertCompositeVariables(compositeVariables, readerVarDict):
     """ Example immplementation of compositeHandler.
@@ -69,23 +79,19 @@ def convertCompositeVariables(compositeVariables, readerVarDict):
     return handledCompositeVariables
 
 
+if __name__ == '__main__':
+    opts, args = parse_options()
 
-# files = ['BDT_training_ss_f3.root'] # ['BDT_training.root' ]
-# files = ['BDT_training.root' ]
-# files = ['/afs/cern.ch/user/y/ytakahas/public/forJan/tH_BDTtraining_20140830/BDT_training_ss_f12.root' ]
-files = ['/afs/cern.ch/user/y/ytakahas/public/forJan/tH_BDTtraining_20140917/BDT_training_ss_f12.root' ]
+    input_file = opts.input_file
+    postfix = opts.out_postfix
 
-
-
-for f in files:
-    outf = f.split('/')[-1].replace('.root', '_mva.root')
-    os.system('cp {file} {file_out}'.format(file=f, file_out=outf))
-
+    outf = input_file.split('/')[-1].replace('.root', '_mva.root')
+    os.system('cp {file} {file_out}'.format(file=input_file, file_out=outf))
 
     n = NtupleTMVAEvaluate.NtupleTMVAEvaluate(outf)
     n.setCompositeVariableHandler(convertCompositeVariables)
     n.setVariables(training_vars)
-    n.addMVAMethod('Fisher', 'Fisher', 'weights/TMVAClassification_Fisher.weights.xml')
-    n.addMVAMethod('BDTG', 'BDTG', 'weights/TMVAClassification_BDTG.weights.xml')
+    n.addMVAMethod('Fisher', 'Fisher', 'weights/TMVAClassification_Fisher{postfix}.weights.xml'.format(postfix=postfix))
+    n.addMVAMethod('BDTG', 'BDTG', 'weights/TMVAClassification_BDTG{postfix}.weights.xml'.format(postfix=postfix))
     
     n.process()
