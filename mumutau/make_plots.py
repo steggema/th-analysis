@@ -73,12 +73,12 @@ if __name__ == '__main__':
     ]
 
     sampleDict = {
-        1:{'name':'WW', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'Diboson'},
+        # 1:{'name':'WW', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'Diboson'},
         1:{'name':'WZ', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'Diboson'},
         2:{'name':'ZZ', 'colour':ROOT.TColor.GetColor(222,90,106), 'label':'Diboson'},
-        3:{'name':'tt0l', 'colour':ROOT.TColor.GetColor(155,133,296), 'label':'t#bar{t}'},
-        4:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,296), 'label':'t#bar{t}'},
-        5:{'name':'tt2l', 'colour':ROOT.TColor.GetColor(155,152,296), 'label':'t#bar{t}'},
+        # 3:{'name':'tt0l', 'colour':ROOT.TColor.GetColor(155,133,296), 'label':'t#bar{t}'},
+        # 4:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,296), 'label':'t#bar{t}'},
+        # 5:{'name':'tt2l', 'colour':ROOT.TColor.GetColor(155,152,296), 'label':'t#bar{t}'},
         # 4:{'name':'tt1l', 'colour':ROOT.TColor.GetColor(155,152,250), 'label':'t#bar{t}'},
         # 5:{'name':'tt2l', 'colour':ROOT.TColor.GetColor(155,152,204), 'label':'t#bar{t}'},
 
